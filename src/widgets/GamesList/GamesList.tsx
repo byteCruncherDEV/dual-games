@@ -7,7 +7,7 @@ const GamesList = () => {
     <div>
       <ul className={styles.gamesList}>
         {games.map((game) => (
-          <li>
+          <li key={game.link}>
             <GamesListItem {...game} />
           </li>
         ))}
