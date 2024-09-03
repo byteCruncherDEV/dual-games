@@ -1,0 +1,36 @@
+.wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0px 10px;
+}
+
+.wrapper {
+  .logo {
+    font-size: 25px;
+    font-weight: 700;
+  }
+
+  .menu ul {
+    gap: 30px;
+    display: flex;
+
+    a {
+      border-radius: 3px;
+      padding: 10px;
+
+      &.active {
+        color: white;
+        background-color: black;
+      }
+    }
+
+    a:hover {
+      background-color: black;
+      color: white;
+    }
+  }
+}

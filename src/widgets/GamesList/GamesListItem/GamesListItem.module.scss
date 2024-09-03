@@ -1,0 +1,31 @@
+.card {
+  border: 1px solid black;
+
+  img {
+    width: 100%;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  &__header {
+    padding: 10px;
+  }
+
+  &__body {
+    padding: 10px;
+  }
+
+  &__footer {
+    padding: 10px;
+  }
+}
+
+.buttonPlay {
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 10px;
+}
