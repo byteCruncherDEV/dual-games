@@ -13,9 +13,8 @@ const Navbar = () => {
         <div className={styles.menu}>
           <ul>
             {links.map((link) => (
-              <li>
+              <li key={link.link}>
                 <NavLink
-                  key={link.link}
                   to={link.link}
                   className={({ isActive, isPending }) =>
                     isPending ? styles.pending : isActive ? styles.active : ''
