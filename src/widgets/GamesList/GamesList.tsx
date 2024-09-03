@@ -4,7 +4,7 @@ import styles from './GameList.module.scss';
 
 const GamesList = () => {
   return (
-    <div>
+    <div className={styles.wrapper}>
       <ul className={styles.gamesList}>
         {games.map((game) => (
           <li key={game.link}>

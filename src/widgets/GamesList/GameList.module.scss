@@ -3,9 +3,12 @@
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 30px;
   grid-row-gap: 30px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 }
-
-
 
 @media screen and (max-width: 960px) {
   .gamesList {
@@ -13,7 +16,7 @@
   }
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 720px) {
   .gamesList {
     grid-template-columns: repeat(2, 1fr);
   }

@@ -8,7 +8,7 @@ const Navbar = () => {
   const [isToggle, setIsToggle] = useState<boolean>(false);
 
   return (
-    <header>
+    <header className={styles.header}>
       <div className={styles.wrapper}>
         <div className={styles.logo}>
           <Link to="/">Krasnov & Kartashov</Link>
