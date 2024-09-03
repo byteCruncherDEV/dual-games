@@ -4,3 +4,17 @@
   grid-column-gap: 30px;
   grid-row-gap: 30px;
 }
+
+
+
+@media screen and (max-width: 960px) {
+  .gamesList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .gamesList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
