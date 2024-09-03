@@ -34,7 +34,7 @@ const Navbar = () => {
       </div>
       {isToggle && (
         <div className={styles.burgerMenu}>
-          <ul>
+          <ul onClick={() => setIsToggle(false)}>
             {links.map((link) => (
               <li key={link.link}>
                 <NavLink
