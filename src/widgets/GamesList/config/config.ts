@@ -8,7 +8,7 @@ export const games: IGame[] = [
   {
     title: 'Больше меньше',
     link: 'more-less',
-    img: 'tiktaktoe.png',
+    img: 'moreless.png',
   },
   {
     title: 'Крестики нолики',
@@ -18,16 +18,16 @@ export const games: IGame[] = [
   {
     title: 'КМБ',
     link: 'stone-cut-paper',
-    img: 'tiktaktoe.png',
+    img: 'stonecutpaper.png',
   },
   {
     title: 'Змейка',
     link: 'snake',
-    img: 'tiktaktoe.png',
+    img: 'snake.png',
   },
   {
     title: 'Угадай число',
     link: 'guess-the-number',
-    img: 'tiktaktoe.png',
+    img: 'guessthenumber.png',
   },
 ];

@@ -1,34 +1,56 @@
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   background-color: white;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.errorInput {
-  color: red;
-  font-weight: 700;
-}
-
-.range {
+.gameWrapper {
+  width: 500px;
+  margin: 0 auto;
   display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
-.statsList {
-  border-radius: 10px;
+.gameSettings {
+  input {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid black;
+  }
+
+  input:focus {
+    box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.3);
+    border: 1px solid #007BFF;
+  }
+
+  .range {
+    display: flex;
+    gap: 10px;
+  }
 }
 
-.gameInfo {
-  border-radius: 10px;
-}
+.controls {
+  button {
+    width: 100%;
+  }
 
-.actions {
-  display: flex;
-  gap: 10px
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  &__move {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+  }
+
+  &__settings {
+    margin-top: 10px;
+  }
 }
 
 .win {
@@ -37,4 +59,10 @@
 
 .lose {
   color: red;
+}
+
+@media screen and (max-width: 560px) {
+  .gameWrapper {
+    width: 100%;
+  }
 }

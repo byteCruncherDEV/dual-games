@@ -3,6 +3,12 @@ import ButtonAction from '../../shared/ButtonAction';
 import styles from './MoreLess.module.scss';
 import { generateRandomNumber, getHalf, isEven } from './utils/utils';
 
+enum IGameChoice {
+  LESS,
+  MORE,
+  EQUAL,
+}
+
 const MoreLess = () => {
   const [win, setWin] = useState<boolean | undefined>(undefined);
   const [winCount, setWinCount] = useState<number>(0);
@@ -11,48 +17,34 @@ const MoreLess = () => {
   const [rangeStart, setRangeStart] = useState<number>(0);
   const [rangeEnd, setRangeEnd] = useState<number>(1000000);
 
-  const [currentNumber, setCurrentNumber] = useState<number>(0);
   const [rangeHalf, setRangeHalf] = useState<number>(getHalf(rangeStart, rangeEnd));
   const [isRangeHalfEven, setIsRangeHalfEven] = useState<boolean>(false);
-
-  useEffect(() => {
-    setCurrentNumber(generateRandomNumber(rangeStart, rangeEnd));
-  }, [gamesCount, rangeStart, rangeEnd]);
 
   useEffect(() => {
     const half = getHalf(rangeStart, rangeEnd);
     setRangeHalf(half);
     setIsRangeHalfEven(isEven(rangeStart + rangeEnd));
-    console.log(rangeHalf, isRangeHalfEven);
   }, [rangeStart, rangeEnd, isRangeHalfEven, rangeHalf]);
 
-  const tryLess = () => {
+  const makeMove = (choice: IGameChoice) => {
     setGamesCount(gamesCount + 1);
-    const isWin = currentNumber < rangeHalf;
+    const generatedNumber = generateRandomNumber(rangeStart, rangeEnd);
+    let isWin: boolean;
+
+    switch (choice) {
+      case IGameChoice.LESS:
+        isWin = generatedNumber < rangeHalf;
+        break;
+      case IGameChoice.MORE:
+        isWin = generatedNumber > rangeHalf;
+        break;
+      case IGameChoice.EQUAL:
+        isWin = generatedNumber == rangeHalf;
+        break;
+    }
+
     setWin(isWin);
     if (isWin) setWinCount(winCount + 1);
-  };
-
-  const tryMore = () => {
-    setGamesCount(gamesCount + 1);
-    const isWin = currentNumber > rangeHalf;
-    setWin(isWin);
-    if (isWin) setWinCount(winCount + 1);
-  };
-
-  const tryEqual = () => {
-    setGamesCount(gamesCount + 1);
-    const isWin = currentNumber == rangeHalf;
-    setWin(isWin);
-    if (isWin) setWinCount(winCount + 1);
-  };
-
-  const resetGame = () => {
-    setRangeStart(0);
-    setRangeEnd(1000000);
-    setWin(undefined);
-    setWinCount(0);
-    setGamesCount(0);
   };
 
   const handleChangeRangeStart = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,49 +63,72 @@ const MoreLess = () => {
     }
   };
 
+  const resetGame = () => {
+    setRangeStart(0);
+    setRangeEnd(1000000);
+    setWin(undefined);
+    setWinCount(0);
+    setGamesCount(0);
+  };
+
   return (
     <div className={styles.wrapper}>
-      <h2>Введите диапазон значений</h2>
-      <div className={styles.range}>
-        <input type="text" value={rangeStart} onChange={handleChangeRangeStart} />
-        <input type="text" value={rangeEnd} onChange={handleChangeRangeEnd} />
-      </div>
-      <ul className={styles.statsList}>
-        <li>Побед: {winCount}</li>
-        <li>Поражений: {gamesCount - winCount}</li>
-        <li>Всего игр: {gamesCount}</li>
-      </ul>
-      <div className={styles.gameInfo}>
-        <h3>{gamesCount != 0 && 'Число было: ' + currentNumber}</h3>
-        <h3 className={win ? styles.win : styles.lose}>
-          {win == undefined ? 'Сделайте первый выбор' : win ? 'Вы угадали' : 'Вы не угадали'}
-        </h3>
-      </div>
+      <div className={styles.gameWrapper}>
+        <div className={styles.gameSettings}>
+          <h2>Введите диапазон значений</h2>
+          <div className={styles.range}>
+            <input autoFocus type="text" value={rangeStart} onChange={handleChangeRangeStart} />
+            <input type="text" value={rangeEnd} onChange={handleChangeRangeEnd} />
+          </div>
+        </div>
 
-      <div className={styles.actions}>
-        <ButtonAction
-          color="white"
-          backgroundColor="red"
-          text={'Меньше < ' + (rangeHalf + Number(!isRangeHalfEven))}
-          onClick={tryLess}
-        />
-        {isRangeHalfEven && (
-          <ButtonAction
-            color="white"
-            backgroundColor="#007BFF"
-            text={'Равно: ' + rangeHalf}
-            onClick={tryEqual}
-          />
-        )}
+        <div className={styles.stats}>
+          <ul className={styles.statsList}>
+            <li>Побед: {winCount}</li>
+            <li>Поражений: {gamesCount - winCount}</li>
+            <li>Всего игр: {gamesCount}</li>
+          </ul>
+        </div>
+        <div className={styles.gameInfo}>
+          <h3>{gamesCount != 0 && 'Число было: '}</h3>
+          <h3 className={win ? styles.win : styles.lose}>
+            {win == undefined ? 'Сделайте первый выбор' : win ? 'Вы угадали' : 'Вы не угадали'}
+          </h3>
+        </div>
 
-        <ButtonAction
-          color="white"
-          backgroundColor="green"
-          text={'Больше > ' + rangeHalf}
-          onClick={tryMore}
-        />
+        <div className={styles.controls}>
+          <div className={styles.controls__move}>
+            <ButtonAction
+              color="white"
+              backgroundColor="red"
+              text={'Меньше < ' + (rangeHalf + Number(!isRangeHalfEven))}
+              onClick={() => makeMove(IGameChoice.LESS)}
+            />
+            {isRangeHalfEven && (
+              <ButtonAction
+                color="white"
+                backgroundColor="#007BFF"
+                text={'Равно: ' + rangeHalf}
+                onClick={() => makeMove(IGameChoice.EQUAL)}
+              />
+            )}
+            <ButtonAction
+              color="white"
+              backgroundColor="green"
+              text={'Больше > ' + rangeHalf}
+              onClick={() => makeMove(IGameChoice.MORE)}
+            />
+          </div>
+          <div className={styles.controls__settings}>
+            <ButtonAction
+              color="white"
+              backgroundColor="grey"
+              text="Сбросить"
+              onClick={resetGame}
+            />
+          </div>
+        </div>
       </div>
-      <ButtonAction color="white" backgroundColor="grey" text="Сбросить" onClick={resetGame} />
     </div>
   );
 };

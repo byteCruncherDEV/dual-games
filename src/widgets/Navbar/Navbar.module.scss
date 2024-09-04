@@ -6,12 +6,15 @@
 .wrapper {
   max-width: 960px;
   margin: 0 auto;
+  padding: 0px 10px;
+  background-color: #F0F0F0;
+}
+
+.mainMenu {
+  height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 80px;
-  padding: 0px 10px;
-  border-radius: 10px;
 }
 
 .logo {
@@ -24,12 +27,11 @@
   display: flex;
 
   a {
-    border-radius: 3px;
-    padding: 10px 20px;
+    padding: 10px;
 
     &.active {
-      color: white;
       background-color: #007BFF;
+      color: white;
     }
   }
 
@@ -41,11 +43,8 @@
 
 .burgerMenu {
   display: none;
-  position: fixed;
-  background-color: white;
   width: 100%;
   font-size: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
   ul {
     display: flex;
@@ -57,7 +56,7 @@
     }
 
     li a {
-      padding: 10px 0px;
+      padding: 20px 0px;
     }
   }
 }
