@@ -19,6 +19,7 @@ const MoreLess = () => {
 
   const [rangeHalf, setRangeHalf] = useState<number>(getHalf(rangeStart, rangeEnd));
   const [isRangeHalfEven, setIsRangeHalfEven] = useState<boolean>(false);
+  const [prevNumber, setPrevNumber] = useState<number>(0);
 
   useEffect(() => {
     const half = getHalf(rangeStart, rangeEnd);
@@ -45,6 +46,7 @@ const MoreLess = () => {
 
     setWin(isWin);
     if (isWin) setWinCount(winCount + 1);
+    setPrevNumber(generatedNumber);
   };
 
   const handleChangeRangeStart = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,7 +92,7 @@ const MoreLess = () => {
           </ul>
         </div>
         <div className={styles.gameInfo}>
-          <h3>{gamesCount != 0 && 'Число было: '}</h3>
+          <h3>{gamesCount != 0 && 'Число было: ' + prevNumber}</h3>
           <h3 className={win ? styles.win : styles.lose}>
             {win == undefined ? 'Сделайте первый выбор' : win ? 'Вы угадали' : 'Вы не угадали'}
           </h3>
