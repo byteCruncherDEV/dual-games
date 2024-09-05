@@ -3,46 +3,14 @@
   flex-direction: column;
   align-items: center;
   width: 500px;
-  padding: 20px;
   margin: 0 auto;
-  border: 1px solid black;
-}
-
-.game__info {
-  margin-bottom: 10px;
 }
 
 .game__field {
   display: grid;
-  grid-template-columns: repeat(3, 30px);
-  grid-template-rows: repeat(3, 30px);
+  grid-template-columns: repeat(3, 60px);
+  grid-template-rows: repeat(3, 60px);
   padding: 1px 0 0 1px;
-}
-
-.cell {
-  border: 1px solid grey;
-  margin: -1px 0 0 -1px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-}
-
-.cell__win {
-  background: rgba(255, 0, 0, 0.1);
-}
-
-.symbol {
-  font-size: 20px;
-  line-height: 24px;
-}
-
-.symbol__x {
-  color: red;
-}
-
-.symbol__o {
-  color: green;
 }
 
 .reset {
@@ -52,4 +20,10 @@
   border: 1px solid gray;
   padding: 4px 12px;
   border-radius: 4px;
+}
+
+@media screen and (max-width: 560px) {
+  .game {
+    width: 100%;
+  }
 }

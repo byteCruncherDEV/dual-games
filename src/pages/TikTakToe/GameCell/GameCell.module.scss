@@ -1,0 +1,12 @@
+.cell {
+  border: 1px solid grey;
+  margin: -1px 0 0 -1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.cell__win {
+  background: rgba(255, 0, 0, 0.1);
+}

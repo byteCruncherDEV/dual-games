@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import styles from './TikTakToe.module.scss';
-
-enum ISymbol {
-  X = 'X',
-  O = 'O',
-}
+import { ISymbol } from './types/types';
+import GameInfo from './GameInfo';
+import GameCell from './GameCell/GameCell';
 
 const computeWinner = (cells: (ISymbol | undefined)[]) => {
   const lines = [
@@ -82,58 +80,5 @@ const TikTakToe = () => {
     </div>
   );
 };
-
-function GameInfo({
-  isDraw,
-  winnerSymbol,
-  currentStep,
-}: {
-  isDraw: boolean;
-  winnerSymbol: ISymbol | undefined;
-  currentStep: ISymbol;
-}) {
-  if (isDraw) {
-    return <div className={styles.game__info}>Ничья</div>;
-  }
-
-  if (winnerSymbol) {
-    return (
-      <div className={styles.game__info}>
-        Победитель: <GameSymbol symbol={winnerSymbol} />
-      </div>
-    );
-  }
-
-  return (
-    <div className={styles.game__info}>
-      Ход: <GameSymbol symbol={currentStep} />
-    </div>
-  );
-}
-
-function GameCell({
-  isWinner,
-  onClick,
-  symbol,
-}: {
-  isWinner: boolean | undefined;
-  onClick: () => void;
-  symbol: ISymbol | undefined;
-}) {
-  return (
-    <button className={`${styles.cell} ${isWinner ? styles.cell__win : ''}`} onClick={onClick}>
-      {symbol ? <GameSymbol symbol={symbol} /> : null}
-    </button>
-  );
-}
-
-function GameSymbol({ symbol }: { symbol: ISymbol }) {
-  const getSymbolClassName = (symbol: ISymbol) => {
-    if (symbol === ISymbol.O) return styles.symbol__o;
-    if (symbol === ISymbol.X) return styles.symbol__x;
-    return '';
-  };
-  return <span className={`${styles.symbol} ${getSymbolClassName(symbol)}`}>{symbol}</span>;
-}
 
 export default TikTakToe;
