@@ -6,7 +6,7 @@ enum ISymbol {
   O = 'O',
 }
 
-const computeWinner = (cells: (ISymbol | null)[]) => {
+const computeWinner = (cells: (ISymbol | undefined)[]) => {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -27,16 +27,16 @@ const computeWinner = (cells: (ISymbol | null)[]) => {
 };
 
 const TikTakToe = () => {
-  const [cells, setCells] = useState<(ISymbol | null)[]>([
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
+  const [cells, setCells] = useState<(ISymbol | undefined)[]>([
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
   ]);
   const [currentStep, setCurrentStep] = useState(ISymbol.O);
   const [winnerSequence, setWinnerSequence] = useState<number[]>();
@@ -55,7 +55,7 @@ const TikTakToe = () => {
   };
 
   const handleResetClick = () => {
-    setCells(Array.from({ length: 9 }, () => null));
+    setCells(Array.from({ length: 9 }, () => undefined));
     setCurrentStep(ISymbol.X);
     setWinnerSequence(undefined);
   };
@@ -89,7 +89,7 @@ function GameInfo({
   currentStep,
 }: {
   isDraw: boolean;
-  winnerSymbol: ISymbol;
+  winnerSymbol: ISymbol | undefined;
   currentStep: ISymbol;
 }) {
   if (isDraw) {
@@ -116,9 +116,9 @@ function GameCell({
   onClick,
   symbol,
 }: {
-  isWinner: boolean;
+  isWinner: boolean | undefined;
   onClick: () => void;
-  symbol: ISymbol;
+  symbol: ISymbol | undefined;
 }) {
   return (
     <button className={`${styles.cell} ${isWinner ? styles.cell__win : ''}`} onClick={onClick}>
