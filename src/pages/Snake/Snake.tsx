@@ -11,7 +11,7 @@ const Snake = () => {
   const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
-    const handleKeyDown = (event: React.KeyboardEvent) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
       switch (event.keyCode) {
         case 37: // Left
           if (direction !== 'RIGHT') setDirection('LEFT');
