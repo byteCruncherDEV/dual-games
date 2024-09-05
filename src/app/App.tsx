@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './Layout/Layout';
+import GameLayout from './GameLayout/GameLayout';
+
 import MoreLess from '../pages/MoreLess';
 import Home from '../pages/Home';
 import About from '../pages/About';
@@ -15,7 +17,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
-          <Route path="games">
+          <Route path="games" element={<GameLayout />}>
             <Route path="more-less" element={<MoreLess />} />
             <Route path="tik-tak-toe" element={<TikTakToe />} />
             <Route path="stone-cut-paper" element={<StoneCutPaper />} />
