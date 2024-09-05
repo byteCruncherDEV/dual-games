@@ -86,7 +86,6 @@ const Snake = () => {
 
   return (
     <div className={styles.App}>
-      <h1>Игра Змейка</h1>
       <canvas
         id="gameCanvas"
         width={canvasSize}
