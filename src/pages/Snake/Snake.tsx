@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import styles from './Snake.module.scss';
+import ButtonAction from '../../shared/ButtonAction';
 
 const box = 20; // Размер ячейки
-const canvasSize = 400;
+const canvasSize = 300;
+const moveSpeed = 150;
 
 const Snake = () => {
-  const [snake, setSnake] = useState([{ x: 9 * box, y: 9 * box }]);
+  const [snake, setSnake] = useState([{ x: 0 * box, y: 0 * box }]);
   const [direction, setDirection] = useState('RIGHT');
   const [food, setFood] = useState(generateFood());
+  const [foodCount, setFoodCount] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
@@ -69,6 +72,7 @@ const Snake = () => {
 
     // Проверка на поедание еды
     if (head.x === food.x && head.y === food.y) {
+      setFoodCount(foodCount + 1);
       setFood(generateFood());
     } else {
       newSnake.pop();
@@ -77,15 +81,28 @@ const Snake = () => {
     setSnake(newSnake);
   };
 
+  const newGame = () => {
+    setGameOver(false);
+    setFoodCount(0);
+    setDirection('RIGHT');
+    setSnake([{ x: 0 * box, y: 0 * box }]);
+  };
+
   useEffect(() => {
     if (!gameOver) {
-      const interval = setInterval(moveSnake, 100);
+      const interval = setInterval(moveSnake, moveSpeed);
       return () => clearInterval(interval);
     }
   }, [snake, gameOver]);
 
   return (
     <div className={styles.App}>
+      <ButtonAction
+        text="Начать игру"
+        backgroundColor="#007BFF"
+        color="white"
+        onClick={newGame}></ButtonAction>
+      <h2>Съедено яблочек: {foodCount}</h2>
       <canvas
         id="gameCanvas"
         width={canvasSize}
@@ -112,6 +129,30 @@ const Snake = () => {
           }
         }}
       />
+      <div className={styles.controls}>
+        <ButtonAction
+          text="↑"
+          backgroundColor="#007BFF"
+          color="white"
+          onClick={() => setDirection('UP')}></ButtonAction>
+        <div className={styles.left__right}>
+          <ButtonAction
+            text="←"
+            backgroundColor="#007BFF"
+            color="white"
+            onClick={() => setDirection('LEFT')}></ButtonAction>
+          <ButtonAction
+            text="→"
+            backgroundColor="#007BFF"
+            color="white"
+            onClick={() => setDirection('RIGHT')}></ButtonAction>
+        </div>
+        <ButtonAction
+          text="↓"
+          backgroundColor="#007BFF"
+          color="white"
+          onClick={() => setDirection('DOWN')}></ButtonAction>
+      </div>
     </div>
   );
 };
